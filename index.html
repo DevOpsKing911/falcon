@@ -1,72 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flying Bird Animation</title>
-    <style>
-        /* Set up the sky background */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            background-color: #87CEEB; /* Sky blue */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        /* Create a simple bird shape with CSS */
-        .bird {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: #333;
-            clip-path: polygon(0 0, 100% 0%, 75% 50%, 100% 100%, 0 100%, 25% 50%);
-            animation: fly 5s linear infinite;
-        }
-
-        /* Fly animation */
-        @keyframes fly {
-            0% {
-                left: -60px; /* Start off-screen on the left */
-                top: 50%; /* Middle of the screen vertically */
-                transform: rotate(0deg);
-            }
-            25% {
-                left: 25%; /* Slightly moved to the right */
-                top: 40%; /* Slightly higher */
-                transform: rotate(15deg); /* Tilting upwards */
-            }
-            50% {
-                left: 50%; /* Center of the screen */
-                top: 50%; /* Back to middle */
-                transform: rotate(0deg); /* Neutral position */
-            }
-            75% {
-                left: 75%; /* Further to the right */
-                top: 40%; /* Slightly higher */
-                transform: rotate(-15deg); /* Tilting downwards */
-            }
-            100% {
-                left: 100vw; /* Off-screen on the right */
-                top: 50%; /* Back to the middle */
-                transform: rotate(0deg); /* Neutral position */
-            }
-        }
-    </style>
-</head>
+<html>
+<style>
+#myContainer {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  background: yellow;
+}
+#myAnimation {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-color: red;
+}
+</style>
 <body>
 
-    <!-- Bird element -->
-    <div class="bird"></div>
+<p>
+<button onclick="myMove()">Click Me</button> 
+</p>
 
-    <script>
-        // JavaScript could be used for more interaction or dynamic behavior, 
-        // but for this example, we don't need any extra functionality.
-    </script>
+<div id ="myContainer">
+<div id ="myAnimation"></div>
+</div>
+
+<script>
+var id = null;
+function myMove() {
+  var elem = document.getElementById("myAnimation");   
+  var pos = 0;
+  clearInterval(id);
+  id = setInterval(frame, 10);
+  function frame() {
+    if (pos == 350) {
+      clearInterval(id);
+    } else {
+      pos++; 
+      elem.style.top = pos + 'px'; 
+      elem.style.left = pos + 'px'; 
+    }
+  }
+}
+</script>
 
 </body>
 </html>
